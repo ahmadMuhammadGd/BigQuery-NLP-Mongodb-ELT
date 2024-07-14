@@ -1,0 +1,14 @@
+{
+    "CREDENTIALS": {
+        "jsonBigQueryCredFilePath": "credentials"
+    },
+    "PATHS": {
+        "pythonModulesPath": "./src"
+    },
+    "SECRETS": {},
+    "BIGQUERY": {
+        "projectId": "",
+        "datasetId": "",
+        "tableId": ""
+    }
+}
