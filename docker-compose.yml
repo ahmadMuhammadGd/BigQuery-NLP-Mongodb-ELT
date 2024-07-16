@@ -16,8 +16,9 @@ x-airflow-common:
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
+    - ./src:/opt/airflow/src
     - ./pipeline_config:/opt/airflow/pipeline_config
-    - ./src:/opt/airflow/dags/src
+    - ./credentials:/opt/airflow/credentials
   
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
@@ -30,7 +31,9 @@ services:
     image: mongo
     restart: always
     volumes:
-      - './data:/data/db'
+      - "./data:/data/db"
+    ports:
+      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
