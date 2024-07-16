@@ -1,0 +1,11 @@
+{
+    "CREDENTIALS": {
+        "jsonBigQueryCredFilePath": "./credentials/my-project-428316-bad106950325.json"
+    },
+    "SECRETS": {},
+    "BIGQUERY": {
+        "projectId": "my-project-428316",
+        "datasetId": "my_dataset12",
+        "viewId":    "cleaned_articles_view"
+    }
+}
