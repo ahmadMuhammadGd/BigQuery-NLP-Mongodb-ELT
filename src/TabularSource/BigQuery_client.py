@@ -12,6 +12,6 @@ class BigQueryClient(TabularSourceExtractorInterface):
             return bigquery.Client(project=project_id, credentials=credentials)
         return bigquery.Client(project=project_id)
 
-    def execute_query(self, query: str):
+    def execute_query(self, query: str)->list[dict]:
         query_job = self.client.query(query)
-        return query_job.result()
+        return [dict(row.items()) for row in query_job]

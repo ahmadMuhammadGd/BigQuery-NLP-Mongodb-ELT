@@ -1,5 +1,5 @@
 from typing import List, Tuple
-from src.KeywordExtraction.Extractor import KeywordExtractorInterface
+from src.KeywordExtraction.base import KeywordExtractorInterface
 
 class KeywordExtractor:
     def __init__(self, extractor: KeywordExtractorInterface):

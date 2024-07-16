@@ -22,5 +22,15 @@ class ConfigParser:
     def get_bigquery_config(self) -> Dict[str, Any]:
         return self.config_data.get('BIGQUERY', {})
 
-    def get_config(self, key: str) -> Any:
-        return self.config_data.get(key)
+    def get_Mongo_config(self) -> Dict[str, Any]:
+        return self.config_data.get('MONGODB', {})
+    
+    def get_from_custome_config(self, section:str, key:str=None):
+        if not key:
+            return self.get_config(section)
+        elif key:
+            return self.config_data.get(section)[key]
+    
+    def get_config(self, section: str) -> Any:
+        return self.config_data.get(section)
+    
