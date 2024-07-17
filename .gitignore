@@ -167,3 +167,9 @@ logs
 
 #credentials 
 credentials/*
+
+#mongodb
+data
+
+# drafts
+test*.py
