@@ -5,9 +5,10 @@ sys.path.insert(1, os.path.join(os.getcwd()))
 from globalVaribles.CleanedArticleView import *
 from src.TabularSource.BigQuery_client import BigQueryClient
 from src.TabularSource.Extractor import Extractor
+from datetime import datetime
+
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
-from datetime import datetime
 
 
 def update_view():

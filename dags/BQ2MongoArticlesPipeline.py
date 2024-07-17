@@ -14,7 +14,9 @@ from src.KeywordExtraction.Yake import YakeKeywordExtractor
 from dags.globalVaribles.BQ2Mongo import *
 
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator # type: ignore
+from airflow.operators.python_operator import PythonOperator # type:ignore
+from airflow.sensors.external_task_sensor import ExternalTaskSensor # type:ignore
+
 from datetime import datetime
 
 
@@ -121,6 +123,12 @@ with DAG('Articles_Keywords_ELT',
         max_active_runs=2,
         catchup=False,
         ) as dag:
+    update_view_success_sensor = ExternalTaskSensor(
+        task_id='update_view_success_sensor',
+        external_dag_id='Update_view',
+        external_task_id='update_view_task',
+        check_existence=True
+    )
     
     extract_load_task = PythonOperator(
         task_id='extract_load_task',
@@ -132,4 +140,4 @@ with DAG('Articles_Keywords_ELT',
         python_callable=transform,
     )
     
-    extract_load_task >> transform_task
+    update_view_success_sensor >> extract_load_task >> transform_task
