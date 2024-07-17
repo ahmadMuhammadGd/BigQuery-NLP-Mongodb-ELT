@@ -69,7 +69,7 @@ def transform():
     
     yake = YakeKeywordExtractor()
     yake.max_ngram_size = 2
-    extractor = KeywordExtractor(yake)
+    keyword_extractor = KeywordExtractor(yake)
     logging.info("KEY WORDS EXTRACTOR INSTANCE HAS BEEN CREATED")
     
     try:
@@ -98,7 +98,8 @@ def transform():
         
         for doc in results:
             text = doc.get('body', '')  
-            keywords = extractor.extract(text)
+            kewyword_score_pair = keyword_extractor.extract(text)
+            keywords = [{"kw":key, "score":value} for key, value in kewyword_score_pair]
             
             updated_doc = {
                 **doc, 

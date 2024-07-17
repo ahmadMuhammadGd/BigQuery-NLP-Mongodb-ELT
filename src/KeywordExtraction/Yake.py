@@ -21,5 +21,5 @@ class YakeKeywordExtractor(KeywordExtractorInterface):
 
     def extract(self, text: str) -> List[Tuple[str, float]]:
         results = self. _extractor_init().extract_keywords(text,)
-        return [{key: float(value)} for key, value in results]
+        return [(key, float(value)) for key, value in results]
 
