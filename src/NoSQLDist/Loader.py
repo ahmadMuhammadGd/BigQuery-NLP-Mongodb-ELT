@@ -23,3 +23,11 @@ class Loader:
             filter_query=filter_query,
             cols_to_show=cols_to_show
         )
+    def create_view(self, view_name:str, view_on:str, pipeline: list=[]):
+        self.db_client.create_view(
+            view_name=view_name,
+            view_on=view_on,
+            pipeline=pipeline
+        )
+    def drop_view(self, view_name:str):
+        self.db_client.drop_view(view_name)

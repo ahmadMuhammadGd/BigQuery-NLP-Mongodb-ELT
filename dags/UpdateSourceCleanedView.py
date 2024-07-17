@@ -9,6 +9,7 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type: ignore
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 
 def update_view():
@@ -42,13 +43,21 @@ default_args = {
     'retries': 1,
 }
 
-with DAG('Update_view',
+with DAG('Update_source_view',
         default_args=default_args,
         max_active_runs=2,
         catchup=False,
         ) as dag:
+    
+    
     update_view_task = PythonOperator(
         task_id='update_view_task',
         python_callable=update_view,
     )
-    update_view_task
+    
+    trigger_pipeline_task = TriggerDagRunOperator(
+            task_id = 'trigger_pipeline_task',
+            trigger_dag_id = 'Articles_Keywords_ELT',
+            wait_for_completion=True,
+    )
+    update_view_task >> trigger_pipeline_task

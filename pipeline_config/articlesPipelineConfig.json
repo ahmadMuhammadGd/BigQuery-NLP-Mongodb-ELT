@@ -12,7 +12,7 @@
         "viewId":    "cleaned_articles_view"
     },
     "MONGODB": {
-        "uri": "mongodb://root:example@localhost:27017/", 
+        "uri": "mongodb://root:example@mongo:27017/", 
         "db_name": "Articles_db"
     }
 }

@@ -39,4 +39,14 @@ class MongoDBClient(NoSQLInterface):
     def find(self, collection_name: str, filter_query: dict, cols_to_show: dict = {}):
         collection = self._get_collection(collection_name)
         return collection.find(filter_query, cols_to_show)
+    
+    def create_view(self, view_name:str, view_on:str, pipeline: list=[]):
+        self.database.create_collection(
+                view_name,
+                viewOn=view_on,
+                pipeline=pipeline
+            )
+    
+    def drop_view(self, view_name: str):
+        self.database[view_name].drop()
 

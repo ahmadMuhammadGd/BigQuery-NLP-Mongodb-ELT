@@ -15,7 +15,6 @@ from dags.globalVaribles.BQ2Mongo import *
 
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator # type:ignore
-from airflow.sensors.external_task_sensor import ExternalTaskSensor # type:ignore
 
 from datetime import datetime
 
@@ -42,10 +41,11 @@ def extractArticles():
     
     logging.info("EXTRACTING DATA ON CATEGORY")
     return {category: extractor.extract(f"""
-            SELECT * EXCEPT(Category)
-            FROM {dataset_id}.{view_id}
-            WHERE Category = "{category}"
-            LIMIT 10;
+        SELECT * EXCEPT(Category), RAND() as random
+        FROM `{dataset_id}.{view_id}`
+        WHERE Category = "{category}"
+        ORDER BY random
+        LIMIT 10;
         """) for category in categories}
             
 
@@ -108,7 +108,79 @@ def transform():
             
             loader.update(collection_name, {'_id':doc['_id']}, updated_doc)
 
-
+def create_view():
+    client = MongoDBClient(uri, db_name)
+    collection_names = client.collections
+    interface = Loader(client)
+    
+    collection_name='' #placeholder
+    keyword_freq_pipeline = [
+        { "$unwind": "$keywords" },
+        {
+            "$group": {
+                "_id": "$keywords.kw",
+                "avg_score": { "$avg": "$keywords.score" },
+                "freq": { "$sum": 1 }
+            }
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "keyword": "$_id",
+                "avg_score": 1,
+                "freq": 1
+            }
+        },
+        { "$sort": { "freq": -1 } }
+    ]
+    for collection_name in collection_names:
+        top_articles_pipeline=[
+            {"$unwind": "$keywords"},
+            {
+                "$lookup": {
+                    "from": f'{collection_name}_keywords_freq',
+                    "localField": "keywords.kw",
+                    "foreignField": "keyword",
+                    "as": "keyword_freq"
+                }
+            },
+            {
+                "$addFields": {
+                    "keywords.freq": { "$arrayElemAt": ["$keyword_freq.freq", 0] }
+                }
+            },
+            {
+                "$group": {
+                    "_id": "$_id",
+                    "title": { "$first": "$title" },
+                    "body": { "$first": "$body" },
+                    "score": { "$sum": "$keywords.freq" }
+                }
+            },
+            { "$sort": { "score": -1 } },
+            {
+                "$project": {
+                    "_id": 0,
+                    "title": 1,
+                    "body": 1,
+                    "score": 1
+                }
+            }
+        ]
+    
+        view_freq_name = f'{collection_name}_keywords_freq_view'
+        if view_freq_name not in collection_names:
+            interface.create_view(view_name=view_freq_name,
+                                view_on=collection_name,
+                                pipeline=keyword_freq_pipeline)
+        
+        view_top_name = f'{collection_name}_top_articles_view'
+        if view_top_name not in collection_names:
+            interface.create_view(view_name=view_top_name,
+                                view_on=collection_name,
+                                pipeline=top_articles_pipeline)
+    
+   
 
 default_args = {
     'owner': 'airflow',
@@ -124,12 +196,6 @@ with DAG('Articles_Keywords_ELT',
         max_active_runs=2,
         catchup=False,
         ) as dag:
-    update_view_success_sensor = ExternalTaskSensor(
-        task_id='update_view_success_sensor',
-        external_dag_id='Update_view',
-        external_task_id='update_view_task',
-        check_existence=True
-    )
     
     extract_load_task = PythonOperator(
         task_id='extract_load_task',
@@ -141,4 +207,9 @@ with DAG('Articles_Keywords_ELT',
         python_callable=transform,
     )
     
-    update_view_success_sensor >> extract_load_task >> transform_task
+    create_view_task = PythonOperator(
+        task_id='create_view_task',
+        python_callable=create_view,
+    )
+    
+    extract_load_task >> transform_task >> create_view_task

@@ -12,3 +12,11 @@ class NoSQLInterface(ABC):
     @abstractmethod
     def find(self, collection_name: str, filter_query: dict, cols_to_show: dict = {}):
         pass
+    
+    @abstractmethod
+    def create_view(self, view_name:str, view_on:str, pipeline: list=[]):
+        pass
+    
+    @abstractmethod
+    def drop_view(self, view_name:str):
+        pass
