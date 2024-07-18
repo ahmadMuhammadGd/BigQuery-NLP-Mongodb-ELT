@@ -10,8 +10,8 @@ Analyzing a collection of articles from BigQuery's open datasets `BBC_news` usin
 
 This project applies `SOLID` principles and class injections to ensure scalability and maintainability. 
 > ## Streamlit Dashboard
-> ![streamlit dashboard](./ReadMeAssets/dashboard.gif)
 >**Check out the streamlit dashboard code at**: https://github.com/ahmadMuhammadGd/Mongodb-Streamlit-Report
+> ![streamlit dashboard](./ReadMeAssets/dashboard.gif)
 ## Pipeline Components
 |                      | **Tools/Technologies**              |
 |------------------------------|----------------------------------|
