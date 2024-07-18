@@ -109,7 +109,7 @@ def transform():
         for doc in results:
             text = doc.get('body', '')  
             kewyword_score_pair = keyword_extractor.extract(text)
-            keywords = [{"kw":key, "score":value} for key, value in kewyword_score_pair]
+            keywords = [{"kw":key, "weight":value} for key, value in kewyword_score_pair]
             
             updated_doc = {
                 **doc, 
@@ -136,7 +136,7 @@ def create_view():
         {
             "$group": {
                 "_id": "$keywords.kw",
-                "avg_score": { "$avg": "$keywords.score" },
+                "avg_score": { "$avg": "$keywords.weight" },
                 "freq": { "$sum": 1 }
             }
         },
@@ -152,37 +152,59 @@ def create_view():
     ]
     for collection_name in collection_names:
         top_articles_pipeline=[
-            {"$unwind": "$keywords"},
-            {
-                "$lookup": {
-                    "from": f'{collection_name}_keywords_freq',
-                    "localField": "keywords.kw",
-                    "foreignField": "keyword",
-                    "as": "keyword_freq"
-                }
-            },
-            {
-                "$addFields": {
-                    "keywords.freq": { "$arrayElemAt": ["$keyword_freq.freq", 0] }
-                }
-            },
-            {
-                "$group": {
-                    "_id": "$_id",
-                    "title": { "$first": "$title" },
-                    "body": { "$first": "$body" },
-                    "score": { "$sum": "$keywords.freq" }
-                }
-            },
-            { "$sort": { "score": -1 } },
-            {
-                "$project": {
-                    "_id": 0,
-                    "title": 1,
-                    "body": 1,
-                    "score": 1
+        { "$unwind": "$keywords" },
+        
+        {
+            "$group": {
+                "_id": "$keywords.kw",
+                "totalCount": { "$sum": 1 },
+                "totalScore": { "$sum": "$keywords.weight" }
+            }
+        },
+        
+        {
+            "$lookup": {
+                "from": f"{collection_name}",  
+                "localField": "_id",
+                "foreignField": "keywords.kw",
+                "as": "docs"
+            }
+        },
+        
+        { "$unwind": "$docs" },
+        { "$unwind": "$docs.keywords" },
+        
+        { "$match": { "$expr": { "$eq": ["$docs.keywords.kw", "$_id"] } } },
+        
+        {
+            "$addFields": {
+                "weightedScore": {
+                    "$multiply": [
+                        { "$divide": [{ "$multiply": ["$docs.keywords.weight", "$totalCount"] }, { "$sum": "$totalCount" }] },
+                        "$totalScore"
+                    ]
                 }
             }
+        },
+        
+        {
+            "$group": {
+                "_id": "$docs._id",
+                "title": { "$first": "$docs.title" },
+                "body": { "$first": "$docs.body" },
+                "score": { "$sum": "$weightedScore" }
+            }
+        },
+        
+        {
+            "$project": {
+                "_id": 0,
+                "title": 1,
+                "body": 1,
+                "score": 1
+            }
+        },
+        { "$sort": { "score": -1 } }
         ]
     
         view_freq_name = f'{collection_name}_keywords_freq_view'
