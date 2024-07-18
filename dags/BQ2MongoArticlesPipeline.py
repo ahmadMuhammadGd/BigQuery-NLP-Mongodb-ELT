@@ -63,7 +63,13 @@ def extract_load():
             source_PK="filename",
             dist_PK="filename")
 
-
+def filter_collection_names(collection_names:list)->list:
+    collection_names = [name for name in collection_names if 'view' not in name]
+    if collection_names:
+        return collection_names
+    else:
+        return []
+    
 def transform():
     global db_name, uri
     
@@ -76,14 +82,15 @@ def transform():
         dist_client = MongoDBClient(uri, db_name)
         logging.info("CONNECTED TO MONGO SUCCESSFULLY!")
         loader = Loader(dist_client)
-        collections = dist_client.collections
-        logging.info(f"collections found: {collections}")
+        collection_names = dist_client.collections
+        collection_names = filter_collection_names(collection_names)
+        logging.info(f"collections found: {collection_names}")
     except Exception as e:
         logging.error(f"FILED TO CONNECT TO MONGO!\n{e}")
         return
     
     keywordsKey = "keywords" 
-    for collection_name in collections:
+    for collection_name in collection_names:
         
         query = {keywordsKey: {"$exists": False}}
         results = loader.find(
@@ -111,6 +118,13 @@ def transform():
 def create_view():
     client = MongoDBClient(uri, db_name)
     collection_names = client.collections
+    
+    existing_view_names = [name for name in collection_names if "view" in name]
+    collection_names = filter_collection_names(collection_names)
+    
+    logging.info(f"existing views:{existing_view_names}")
+    logging.info(f"Collection names:{collection_names}")
+    
     interface = Loader(client)
     
     collection_name='' #placeholder
@@ -169,13 +183,13 @@ def create_view():
         ]
     
         view_freq_name = f'{collection_name}_keywords_freq_view'
-        if view_freq_name not in collection_names:
+        if view_freq_name not in existing_view_names:
             interface.create_view(view_name=view_freq_name,
                                 view_on=collection_name,
                                 pipeline=keyword_freq_pipeline)
         
         view_top_name = f'{collection_name}_top_articles_view'
-        if view_top_name not in collection_names:
+        if view_top_name not in existing_view_names:
             interface.create_view(view_name=view_top_name,
                                 view_on=collection_name,
                                 pipeline=top_articles_pipeline)
