@@ -34,92 +34,91 @@ An example from business collection.
 ```json
 {
   "_id": {
-    "$oid": "6697feb71048a62901c6e1f3"
+    "$oid": "669992bab427cd84f1c680db"
   },
-  "filename": "bbc/business/458.txt",
-  "body": "The founder and former boss of Parmalat has apologised to investors who lost money as a result of the Italian dairy firm's collapse.\n\nCalisto Tanzi said he would co-operate fully with prosecutors investigating the background to one of Europe's largest financial scandals. Parmalat was placed into bankruptcy protection in 2003 after a 14bn euro black hole was found in its accounts. More than 130,000 people lost money following the firm's collapse. Mr Tanzi, 66, issued a statement through his lawyer after five hours of questioning by prosecutors in Parma on 15 January.\n\nProsecutors are seeking indictments against Mr Tanzi and 28 others - including several members of his family and former Parmalat chief financial officer Fausto Tonna - for alleged manipulation of stock market prices and making misleading statements to accountants and Italy's financial watchdog. Two former Parmalat auditors will stand trial later this month for their role in the firm's collapse.\n\n\"I apologise to all who have suffered so much damage as a result of my schemes to make my dream of an industrial project come true,\" Mr Tanzi's statement said. \"It is my duty to collaborate fully with prosecutors to reconstruct the causes of Parmalat's sudden default and who is responsible.\" Mr Tanzi spent several months in jail in the wake of Parmalat's collapse and was kept under house arrest until last September. Parmalat is now being run by a state appointed administrator, Enrico Bondi, who has launched lawsuits against 80 banks in an effort to recover money for the bankrupt company and its shareholders. He has alleged that these companies were aware of the true state of Parmalat's finances but continued to lend money to the company. The companies insist they were the victims of fraudulent book-keeping. Parmalat was declared insolvent after it emerged that 4 billion euros (£2.8bn; $4.8bn) it supposedly held in an offshore account did not in fact exist. The firm's demise sent shock waves through Italy, where its portfolio of top-selling food brands and its position as the owner of leading football club Parma had turned it into a household name.\n",
-  "random": 0.0006982499583650813,
-  "title": "Parmalat founder offers apology",
+  "filename": "bbc/business/281.txt",
+  "body": "Life insurer Axa Sun Life has lowered annual bonus payouts for up to 50,000 with-profits investors.\n\nRegular annual bonus rates on former Axa Equity & Law with-profits policies are to be cut from 2% to 1% for 2004. Axa blamed a poor stock market performance for the cut, adding that recent gains have not yet offset the market falls seen in 2001 and 2002. The cut will hit an estimated 3% of Axa's policyholders. The rest will know their fate in March.\n\nThe cuts on Axa's policies will mean a policyholder who had invested £50 a month into an endowment policy for the past 25 years would see a final maturity payout of £46,998. This equated to a annual investment growth rate of 8% Axa said. With-profits policies are designed to smooth out the peaks and troughs of stock market volatility. However, heavy stock market falls throughout 2001 and 2002 forced most firms to trim bonus rates on their policies. \"The stock market has grown over the past 18 months, however not enough to undo the damage that occurred during 2001 and 2002,\" Axa spokesman Mark Hamilton, Axa spokesman, told BBC News. Axa cut payouts for the same investors last January.\n",
+  "title": "Axa Sun Life cuts bonus payments",
   "keywords": [
     {
-      "kw": "Italian dairy",
-      "score": 0.013367307591868544
+      "kw": "Sun Life",
+      "score": 0.007648533691608657
     },
     {
-      "kw": "Parmalat",
-      "score": 0.027950299081548495
+      "kw": "Life insurer",
+      "score": 0.024272265880068356
     },
     {
-      "kw": "Tanzi",
-      "score": 0.04550597019923868
+      "kw": "Axa Sun",
+      "score": 0.024500972347428197
     },
     {
-      "kw": "firm collapse",
-      "score": 0.05602066230363478
+      "kw": "Axa",
+      "score": 0.03517384654956117
     },
     {
-      "kw": "Italian",
-      "score": 0.06858188436226552
+      "kw": "Life",
+      "score": 0.050237791593689685
     },
     {
-      "kw": "dairy firm",
-      "score": 0.07361442107985204
+      "kw": "annual bonus",
+      "score": 0.0638285585827784
     },
     {
-      "kw": "firm",
-      "score": 0.0891224126128558
+      "kw": "Axa Equity",
+      "score": 0.06904821186647411
     },
     {
-      "kw": "collapse",
-      "score": 0.10090128236005153
+      "kw": "Sun",
+      "score": 0.07554549500129021
     },
     {
-      "kw": "Europe largest",
-      "score": 0.10154966381865103
+      "kw": "Law with-profits",
+      "score": 0.07718050218782431
     },
     {
-      "kw": "lost money",
-      "score": 0.10215472001201979
+      "kw": "insurer Axa",
+      "score": 0.08068561552682202
     },
     {
-      "kw": "prosecutors",
-      "score": 0.10468421268755809
+      "kw": "stock market",
+      "score": 0.08688426484110995
     },
     {
-      "kw": "Calisto Tanzi",
-      "score": 0.10645232260575588
+      "kw": "lowered annual",
+      "score": 0.09030430262142879
     },
     {
-      "kw": "Parmalat collapse",
-      "score": 0.1130006854040157
+      "kw": "market",
+      "score": 0.10012381852669737
     },
     {
-      "kw": "money",
-      "score": 0.11561567670057422
+      "kw": "bonus rates",
+      "score": 0.10399520573237472
     },
     {
-      "kw": "Tanzi statement",
-      "score": 0.1241301320727035
+      "kw": "bonus",
+      "score": 0.1074534507870518
     },
     {
-      "kw": "Fausto Tonna",
-      "score": 0.1442827943131141
+      "kw": "with-profits policies",
+      "score": 0.11037455339425017
     },
     {
-      "kw": "financial",
-      "score": 0.14665078856152797
+      "kw": "cut",
+      "score": 0.11246057554565242
     },
     {
-      "kw": "lost",
-      "score": 0.18341870819798636
+      "kw": "annual",
+      "score": 0.11705907577406108
     },
     {
-      "kw": "Parma",
-      "score": 0.18387860016817345
+      "kw": "with-profits",
+      "score": 0.11705907577406108
     },
     {
-      "kw": "Italy",
-      "score": 0.18594613475620947
+      "kw": "policies",
+      "score": 0.12873190701492288
     }
   ]
 }

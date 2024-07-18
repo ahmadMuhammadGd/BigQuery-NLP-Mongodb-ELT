@@ -41,10 +41,13 @@ def extractArticles():
     
     logging.info("EXTRACTING DATA ON CATEGORY")
     return {category: extractor.extract(f"""
-        SELECT * EXCEPT(Category), RAND() as random
-        FROM `{dataset_id}.{view_id}`
-        WHERE Category = "{category}"
-        ORDER BY random
+        SELECT * EXCEPT(Category, random), 
+        FROM(
+            SELECT *, RAND() as random
+            FROM `{dataset_id}.{view_id}`
+            WHERE Category = "{category}"
+            ORDER BY random
+        )
         LIMIT 10;
         """) for category in categories}
             
