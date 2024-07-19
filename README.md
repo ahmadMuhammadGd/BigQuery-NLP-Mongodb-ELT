@@ -34,91 +34,91 @@ An example from business collection.
 ```json
 {
   "_id": {
-    "$oid": "669992bab427cd84f1c680db"
+    "$oid": "66999923b427cd84f1c6854b"
   },
-  "filename": "bbc/business/281.txt",
-  "body": "Life insurer Axa Sun Life has lowered annual bonus payouts for up to 50,000 with-profits investors.\n\nRegular annual bonus rates on former Axa Equity & Law with-profits policies are to be cut from 2% to 1% for 2004. Axa blamed a poor stock market performance for the cut, adding that recent gains have not yet offset the market falls seen in 2001 and 2002. The cut will hit an estimated 3% of Axa's policyholders. The rest will know their fate in March.\n\nThe cuts on Axa's policies will mean a policyholder who had invested £50 a month into an endowment policy for the past 25 years would see a final maturity payout of £46,998. This equated to a annual investment growth rate of 8% Axa said. With-profits policies are designed to smooth out the peaks and troughs of stock market volatility. However, heavy stock market falls throughout 2001 and 2002 forced most firms to trim bonus rates on their policies. \"The stock market has grown over the past 18 months, however not enough to undo the damage that occurred during 2001 and 2002,\" Axa spokesman Mark Hamilton, Axa spokesman, told BBC News. Axa cut payouts for the same investors last January.\n",
-  "title": "Axa Sun Life cuts bonus payments",
+  "filename": "bbc/business/086.txt",
+  "body": "UK manufacturing grew at its slowest pace in one-and-a-half years in January, according to a survey.\n\nThe Chartered Institute of Purchasing and Supply (CIPS) said its purchasing manager index (PMI) fell to 51.8 from a revised 53.3 in December. But, despite missing forecasts of 53.7, the PMI number remained above 50 - indicating expansion in the sector. The CIPS said that the strong pound had dented exports while rising oil and metals prices had kept costs high.\n\nThe survey added that rising input prices and cooling demand had deterred factory managers from hiring new workers in an effort to cut costs. That triggered the second successive monthly fall in the CIPS employment index to 48.3 - its lowest level since June 2003. The survey is more upbeat than official figures - which suggest that manufacturing is in recession - but analysts said the survey did suggest that the manufacturing recovery was running out of steam. \"It appears that the UK is in a two-tier economy again,\" said Prebon Yamane economist Lena Komileva. \"You have weakness in manufacturing, which I think would concern policymakers at the Bank of England.\"\n",
+  "title": "Manufacturing recovery 'slowing'",
   "keywords": [
     {
-      "kw": "Sun Life",
-      "score": 0.007648533691608657
+      "kw": "slowest pace",
+      "weight": 0.02520863662691541
     },
     {
-      "kw": "Life insurer",
-      "score": 0.024272265880068356
+      "kw": "Chartered Institute",
+      "weight": 0.03837811335204958
     },
     {
-      "kw": "Axa Sun",
-      "score": 0.024500972347428197
+      "kw": "January",
+      "weight": 0.05866401249798595
     },
     {
-      "kw": "Axa",
-      "score": 0.03517384654956117
+      "kw": "CIPS",
+      "weight": 0.07044058687133181
     },
     {
-      "kw": "Life",
-      "score": 0.050237791593689685
+      "kw": "manufacturing grew",
+      "weight": 0.0746641993937594
     },
     {
-      "kw": "annual bonus",
-      "score": 0.0638285585827784
+      "kw": "survey",
+      "weight": 0.08878758334059766
     },
     {
-      "kw": "Axa Equity",
-      "score": 0.06904821186647411
+      "kw": "purchasing manager",
+      "weight": 0.0963642836491709
     },
     {
-      "kw": "Sun",
-      "score": 0.07554549500129021
+      "kw": "PMI",
+      "weight": 0.09723556010112563
     },
     {
-      "kw": "Law with-profits",
-      "score": 0.07718050218782431
+      "kw": "PMI number",
+      "weight": 0.1040946673239318
     },
     {
-      "kw": "insurer Axa",
-      "score": 0.08068561552682202
+      "kw": "Purchasing",
+      "weight": 0.10882339854406728
     },
     {
-      "kw": "stock market",
-      "score": 0.08688426484110995
+      "kw": "manufacturing",
+      "weight": 0.11076717738184556
     },
     {
-      "kw": "lowered annual",
-      "score": 0.09030430262142879
+      "kw": "years",
+      "weight": 0.13941498844255026
     },
     {
-      "kw": "market",
-      "score": 0.10012381852669737
+      "kw": "CIPS employment",
+      "weight": 0.14283774404582372
     },
     {
-      "kw": "bonus rates",
-      "score": 0.10399520573237472
+      "kw": "Lena Komileva",
+      "weight": 0.15546651362990566
     },
     {
-      "kw": "bonus",
-      "score": 0.1074534507870518
+      "kw": "grew",
+      "weight": 0.15680812107320088
     },
     {
-      "kw": "with-profits policies",
-      "score": 0.11037455339425017
+      "kw": "slowest",
+      "weight": 0.15680812107320088
     },
     {
-      "kw": "cut",
-      "score": 0.11246057554565242
+      "kw": "pace",
+      "weight": 0.15680812107320088
     },
     {
-      "kw": "annual",
-      "score": 0.11705907577406108
+      "kw": "Prebon Yamane",
+      "weight": 0.16670674941541747
     },
     {
-      "kw": "with-profits",
-      "score": 0.11705907577406108
+      "kw": "Supply",
+      "weight": 0.17792989556166205
     },
     {
-      "kw": "policies",
-      "score": 0.12873190701492288
+      "kw": "December",
+      "weight": 0.17792989556166205
     }
   ]
 }
@@ -129,64 +129,31 @@ An example from business collection.
 ```json
 [
   {
-    "avg_score": 0.111338258204852,
-    "freq": 22,
-    "keyword": "year"
+    "_id": "firm",
+    "avg_score": 0.12902223814959402,
+    "freq": 2,
+    "keyword": "firm"
   },
   {
-    "avg_score": 0.09752931847683353,
-    "freq": 12,
-    "keyword": "economy"
+    "_id": "production",
+    "avg_score": 0.1779746569589588,
+    "freq": 2,
+    "keyword": "production"
   },
-  {
-    "avg_score": 0.05581532139028804,
-    "freq": 11,
-    "keyword": "Russian"
-  },
-  {
-    "avg_score": 0.05484452196956291,
-    "freq": 11,
-    "keyword": "dollar"
-  },
-  {
-    "avg_score": 0.10877142304975647,
-    "freq": 10,
-    "keyword": "prices"
-  },
-  {
-    "avg_score": 0.07934415679812448,
-    "freq": 10,
-    "keyword": "Bank"
-  },
-  {
-    "avg_score": 0.08305731846809183,
-    "freq": 9,
-    "keyword": "European"
-  },
-  {
-    "avg_score": 0.09940168001874845,
-    "freq": 9,
-    "keyword": "euro"
-  },
-  {
-    "avg_score": 0.11052457035380452,
-    "freq": 9,
-    "keyword": "December"
-  },
-  {
-    "avg_score": 0.046666928383127686,
-    "freq": 9,
-    "keyword": "Yukos"
-  }
+  .
+  .
+  .
 ]
 ```
 ### business_top_articles_view
 ```json
 [
   {
-    "title": "Boeing secures giant Japan order",
-    "body": "Boeing is to supply Japan Airlines with up to 50 of its forthcoming 7E7 planes in a deal that could be worth as much as $6bn (£3.1bn) for the US giant.\n\nJapan Airlines has made a firm order for 30 of the aircraft, at $120m each, with the option to buy 20 more. Asia's biggest airline joins Japanese rival All Nippon as one of the first carriers to order the mid-size 7E7, which Boeing says is super-economical. Airbus this week announced the first pre-sale of its 7E7 rival - the A350. Boeing's great European competitor is to sell 10 of its forthcoming A350 to Spanish carrier Air Europe, which has the option to buy two more in a deal that could be worth more than $1.8bn. Both the 7E7 and the A350 are being designed to be as fuel-efficient as possible in the 200- to 300-seat sector, and each will be available in both short and long range versions.\n\nJapan Airlines said it had looked at both aircraft before choosing the 7E7, also known as the Dreamliner. \"We chose the 7E7 after carefully considering both it and Airbus' aircraft,\" said a Japan Airlines spokesman. \"The 7E7 fits better for what we needed and it could be delivered when we hoped to get it.\" Boeing continues to enjoy a dominance over Airbus in Japan, and Japanese companies are taking key roles in building the 7E7. The first 7E7s will be delivered to Japan Airlines in April 2008. Boeing has set itself a target of getting 200 firm commitments for the 7E7 by the end of this year, and has orders for 56 so far. Airbus hopes to have 50 orders in place for the A350 by mid-2005.\n",
-    "score": 0.5351592200005112
+    "_id": "669a6d683a0352fb4b8cbb13",
+    "filename": "bbc/business/071.txt",
+    "body": "Japanese brewers are increasingly making money from beer-flavoured drinks rather than beer itself\n\nBeer and spirits are heavily taxed in Japan, driving breweries to search for alternatives. Japan's long economic downturn helped drive the trend, as drinkers looked for cheaper opportunities to drown their sorrows. Now, according to Asahi Breweries, the market for so-called \"beer-like\" drinks is set to grow 84% this year.\n\nAsahi is predicting profits to rise 50% in 2005 as it launches a drink based on soybean peptides rather than malt. The chosen name, \"Shinnama\" or \"new draft\", disguises its non-beer nature. But despite a record profit in 2004 of 30.6bn yen ($291m; £154m), up 31.8% on the previous year, Asahi is coming late to the market. Key rival Sapporo is already well-established with the beer-flavoured \"Draft One\". Suntory, meanwhile, is doing well with \"Super Blue\", which combines happoshu - an existing low-cost beer alternative made with malt and seawater - and shochu, a distilled alcohol derived from sweet potatoes or barley. Happoshu has been a mainstay of brewery profits for years, taking over from beer thanks to its low tax and therefore low cost. Kirin, the fourth big name, is launching its own \"third-type\" drink in April.\n",
+    "title": "Japan turns to beer alternatives",
+    "averageScore": 0.1370148071643585
   },
 ]
 ```

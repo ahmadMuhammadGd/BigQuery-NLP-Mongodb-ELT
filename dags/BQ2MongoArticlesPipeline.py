@@ -142,7 +142,7 @@ def create_view():
         },
         {
             "$project": {
-                "_id": 0,
+                "_id": 1,
                 "keyword": "$_id",
                 "avg_score": 1,
                 "freq": 1
@@ -151,75 +151,44 @@ def create_view():
         { "$sort": { "freq": -1 } }
     ]
     for collection_name in collection_names:
+        view_freq_name = f'{collection_name}_keywords_freq_view'
+        view_top_name = f'{collection_name}_top_articles_view'
+        
         top_articles_pipeline=[
-        { "$unwind": "$keywords" },
-        
-        {
-            "$group": {
-                "_id": "$keywords.kw",
-                "totalCount": { "$sum": 1 },
-                "totalScore": { "$sum": "$keywords.weight" }
-            }
-        },
-        
-        {
-            "$lookup": {
-                "from": f"{collection_name}",  
-                "localField": "_id",
-                "foreignField": "keywords.kw",
-                "as": "docs"
-            }
-        },
-        
-        { "$unwind": "$docs" },
-        { "$unwind": "$docs.keywords" },
-        
-        { "$match": { "$expr": { "$eq": ["$docs.keywords.kw", "$_id"] } } },
-        
-        {
-            "$addFields": {
-                "weightedScore": {
-                    "$multiply": [
-                        { "$divide": [{ "$multiply": ["$docs.keywords.weight", "$totalCount"] }, { "$sum": "$totalCount" }] },
-                        "$totalScore"
-                    ]
-                }
-            }
-        },
-        
-        {
-            "$group": {
-                "_id": "$docs._id",
-                "title": { "$first": "$docs.title" },
-                "body": { "$first": "$docs.body" },
-                "score": { "$sum": "$weightedScore" }
-            }
-        },
-        
-        {
-            "$project": {
-                "_id": 0,
-                "title": 1,
-                "body": 1,
-                "score": 1
-            }
-        },
-        { "$sort": { "score": -1 } }
+            { "$unwind": "$keywords" },
+            { "$lookup": {
+                "from": f"{view_freq_name}",
+                "localField": "keywords.kw",
+                "foreignField": "keyword",
+                "as": "keywordData"
+            }},
+            { "$unwind": {
+                "path": "$keywordData",
+                "preserveNullAndEmptyArrays": True
+            }},
+            { "$addFields": {
+                "score": { "$multiply": ["$keywordData.freq", "$keywordData.avg_score"] }
+            }},
+            { "$group": {
+                "_id": "$_id",
+                "filename": { "$first": "$filename" },
+                "body": { "$first": "$body" },
+                "title": { "$first": "$title" },
+                "averageScore": { "$avg": "$score" }
+            }},
+            { "$sort": { "averageScore": -1 }},
         ]
     
-        view_freq_name = f'{collection_name}_keywords_freq_view'
         if view_freq_name not in existing_view_names:
             interface.create_view(view_name=view_freq_name,
                                 view_on=collection_name,
                                 pipeline=keyword_freq_pipeline)
         
-        view_top_name = f'{collection_name}_top_articles_view'
         if view_top_name not in existing_view_names:
             interface.create_view(view_name=view_top_name,
                                 view_on=collection_name,
                                 pipeline=top_articles_pipeline)
     
-   
 
 default_args = {
     'owner': 'airflow',
