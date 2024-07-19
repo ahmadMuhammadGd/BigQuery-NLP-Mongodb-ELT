@@ -194,6 +194,10 @@ An example from business collection.
         ├── BigQuery_client.py
         └── Extractor.py
 ```
+## VERY IMPORTANT NOTE
+>  SET "uri" TO "mongodb://root:example@mongo:27017/" IF YOU WANT TO ACCESS CONTAINER FROM AIRFLOW
+>  SET "uri" TO "mongodb://root:example@localhost:27017/" IF YOU WANT TO ACCESS CONTAINER FROM YOUR HOST MACHINE
+
 
 ## Exploring Source Data
 Insights and results are documented in `./Notebooks/ArticlesSourceEDA.ipynb`.
